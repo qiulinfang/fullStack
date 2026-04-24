@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Todo } from '../types/todo';
+import type { Todo } from '../types/todo';
 import todoService from '../services/todoService';
 
 export const useTodos = () => {

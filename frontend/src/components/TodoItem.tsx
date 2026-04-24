@@ -1,6 +1,7 @@
 import React from 'react';
 import { CheckCircle, Circle, Trash2 } from 'lucide-react';
 import type { Todo } from '../types/todo';
+import styles from './TodoItem.module.css';
 
 interface TodoItemProps {
   todo: Todo;
@@ -10,23 +11,23 @@ interface TodoItemProps {
 
 export const TodoItem: React.FC<TodoItemProps> = ({ todo, onToggle, onDelete }) => {
   return (
-    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+    <div className={styles.todoItem}>
       <div
-        className="flex items-center gap-3 cursor-pointer flex-1"
+        className={styles.todoContent}
         onClick={() => onToggle(todo)}
       >
         {todo.completed ? (
-          <CheckCircle className="text-green-500" size={20} />
+          <CheckCircle className="icon-success" color="#10b981" size={20} />
         ) : (
-          <Circle className="text-gray-400" size={20} />
+          <Circle className="icon-muted" color="#9ca3af" size={20} />
         )}
-        <span className={`${todo.completed ? 'line-through text-gray-400' : 'text-gray-700'}`}>
+        <span className={`${styles.todoText} ${todo.completed ? styles.completed : ''}`}>
           {todo.title}
         </span>
       </div>
       <button
         onClick={() => todo.id && onDelete(todo.id)}
-        className="text-red-500 hover:text-red-700 p-1"
+        className={styles.deleteBtn}
       >
         <Trash2 size={18} />
       </button>

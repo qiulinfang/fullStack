@@ -1,0 +1,73 @@
+.loginContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-gray);
+  padding: 3rem 1rem;
+}
+
+.loginCard {
+  max-width: 28rem;
+  width: 100%;
+  background: var(--white);
+  padding: 2.5rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+}
+
+.loginTitle {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.loginForm {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputGroupStacked {
+  border-radius: 0.375rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.inputWithIcon {
+  position: relative;
+}
+
+.inputWithIcon .icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.inputWithIcon input {
+  padding-left: 2.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.inputTop {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.inputBottom {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  margin-top: -1px;
+}
+
+.errorMessage {
+  color: #ef4444;
+  font-size: 0.875rem;
+  text-align: center;
+}

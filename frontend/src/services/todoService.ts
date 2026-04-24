@@ -1,5 +1,5 @@
 import api from '../api/axios';
-import { Todo } from '../types/todo';
+import type { Todo } from '../types/todo';
 
 const todoService = {
   getAll: async () => {

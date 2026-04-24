@@ -1,32 +1,41 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useTodos } from './hooks/useTodos';
 import { TodoInput } from './components/TodoInput';
 import { TodoItem } from './components/TodoItem';
+import { Login } from './components/Login';
+import styles from './App.module.css';
 
-function App() {
+const TodoList = () => {
   const { todos, loading, error, addTodo, toggleTodo, deleteTodo } = useTodos();
+  const username = localStorage.getItem('username');
+
+  if (!localStorage.getItem('token')) {
+    return <Navigate to="/login" />;
+  }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-      <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
-        <div>
-          <h2 className="text-center text-3xl font-extrabold text-gray-900">
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <div className={styles.todoHeader}>
+          <h2 className={styles.title}>
             Todo List
           </h2>
+          <span className={styles.userInfo}>Hi, {username}</span>
         </div>
         
         <TodoInput onAdd={addTodo} />
 
         {error && (
-          <div className="mt-4 p-2 bg-red-100 text-red-700 rounded text-center text-sm">
+          <div className={styles.errorMessage}>
             {error}
           </div>
         )}
 
         {loading ? (
-          <div className="text-center py-4 text-gray-500">Loading...</div>
+          <div className={styles.emptyMsg}>Loading...</div>
         ) : (
-          <div className="mt-6 space-y-4">
+          <div className={styles.todoList}>
             {todos.map((todo) => (
               <TodoItem
                 key={todo.id}
@@ -36,12 +45,32 @@ function App() {
               />
             ))}
             {todos.length === 0 && !error && (
-              <p className="text-center text-gray-500 py-4">No tasks yet. Add one above!</p>
+              <p className={styles.emptyMsg}>No tasks yet. Add one above!</p>
             )}
           </div>
         )}
+        <button
+          onClick={() => {
+            localStorage.clear();
+            window.location.href = '/login';
+          }}
+          className={styles.logoutBtn}
+        >
+          Logout
+        </button>
       </div>
     </div>
+  );
+};
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<TodoList />} />
+      </Routes>
+    </Router>
   );
 }
 
